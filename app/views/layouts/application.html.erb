@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    body {
+        margin: 0;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 25%;
+        background-color: #f1f1f1;
+        position: fixed;
+        height: 100%;
+        overflow: auto;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    li a.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #555;
+        color: white;
+    }
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #f8f9fa !important;
+        color: black;
+        text-align: center;
+        padding:10px;
+      }
+    </style>
+    <title>HytchHyker</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <nav  class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">HytchHyker</a>
+
+    <form class="form-inline">
+      <% if user_signed_in? %>
+        <span class="btn btn-outline-primary" role="button">
+<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>        </span>
+        <%else %>
+        <a class="btn btn-outline-primary" href="users/sign_in" role="button">
+        Login
+         </a>
+
+      <div style="padding-left: 10px;">
+        <a class="btn btn-outline-success" href="users/sign_up" role="button">
+          Sign Up
+        </a>
+      </div>
+            <% end %>
+
+    </form>
+  </nav>
+  <body>
+
+  <ul>
+    <li><%= link_to "Browse", "/trips/" %></li>
+    <li><%= link_to "Post", "/trips/new" %></li>
+    <li><%= link_to "Contact", "/contact/" %></li>
+    <li><%= link_to "About", "/about/" %></li>
+  </ul>
+
+  <div style="margin-left:25%;padding:1px 16px;height:1000px;">
+  <%= yield %>
+  </div>
+
+  </body>
+  <div class="footer">
+    <% if user_signed_in? %>
+      <p>Logged in as: <%= @user %></p>
+      <% end %>
+  <p>Ruby on Rails - Luke Price - 2019</p>
+  </div>
+</html>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
