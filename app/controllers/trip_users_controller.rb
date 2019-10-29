@@ -25,7 +25,7 @@ class TripUsersController < ApplicationController
   # POST /trip_users.json
   def create
     @trip_user = TripUser.new(trip_user_params)
-
+    @tripID = 1
     respond_to do |format|
       if @trip_user.save
         format.html { redirect_to @trip_user, notice: 'Trip user was successfully created.' }

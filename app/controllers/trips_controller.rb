@@ -1,5 +1,6 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :except => [:index]
 
   # GET /trips
   # GET /trips.json
@@ -25,7 +26,9 @@ class TripsController < ApplicationController
   # POST /trips.json
   def create
     @trip = Trip.new(trip_params)
-
+    @trip.driver_id = current_user.email
+    @recent_trip = Trip.order("created_at").last
+    @trip.trip_id = @recent_trip.trip_id + 1
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }

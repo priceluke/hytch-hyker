@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_162102) do
+ActiveRecord::Schema.define(version: 2019_10_29_112133) do
 
   create_table "homes", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,14 +19,14 @@ ActiveRecord::Schema.define(version: 2019_10_28_162102) do
 
   create_table "trip_users", force: :cascade do |t|
     t.integer "TripID"
-    t.integer "PassengerID"
+    t.string "PassengerID"
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "trips", force: :cascade do |t|
-    t.integer "driver_id"
+    t.string "driver_id"
     t.integer "trip_id"
     t.datetime "when"
     t.string "destination"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 2019_10_28_162102) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "UserID"
+    t.string "name"
+    t.datetime "dob"
+    t.string "contactNumber"
+    t.integer "vehicleCapacity"
+    t.string "postcode"
+    t.string "numberPlate"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

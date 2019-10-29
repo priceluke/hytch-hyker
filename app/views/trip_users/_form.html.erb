@@ -12,15 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :TripID %>
-    <%= form.number_field :TripID %>
+    <%= form.number_field :TripID, hidden: true, value:  params[:trip_id] %>
   </div>
 
   <div class="field">
     <%= form.label :PassengerID %>
-    <%= form.number_field :PassengerID %>
+    <%= form.text_field :PassengerID, hidden: true, value: params[:passenger_id] %>
   </div>
-
+#f.text_field :nome, class: "form-control", disabled: true?
   <div class="field">
     <%= form.label :message %>
     <%= form.text_area :message %>

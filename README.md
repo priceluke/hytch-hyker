@@ -26,3 +26,11 @@ Trips
 UserTrip
 	TripID*
 	PassengerID*
+	Message
+
+TODO:
+>Post forms need to take logged in user and require login
+>link trips to users
+>view trips you are a part of
+>view people who have joined your trip
+

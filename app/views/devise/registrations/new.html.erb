@@ -20,6 +20,26 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+  <div>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  <div>
+    <%= f.label :dob %><br />
+    <%= f.date_select :dob, autofocus: true %>
+  </div>
+  <div>
+    <%= f.label :contactNumber %><br />
+    <%= f.text_field :contactNumber, autofocus: true %>
+  </div>
+  <div>
+    <%= f.label :postcode %><br />
+    <%= f.text_field :postcode, autofocus: true %>
+  </div>
+  <div>
+    <%= f.label :numberPlate %><br />
+    <%= f.text_field :numberPlate, autofocus: true %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

@@ -1,18 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  driver_id: 1
+  driver_id: MyString
   trip_id: 1
-  when: 2019-10-28 16:18:20
+  when: 2019-10-28 20:47:08
   destination: MyString
   source: MyString
   petrolcost: 1
   description: MyText
 
 two:
-  driver_id: 1
+  driver_id: MyString
   trip_id: 1
-  when: 2019-10-28 16:18:20
+  when: 2019-10-28 20:47:08
   destination: MyString
   source: MyString
   petrolcost: 1

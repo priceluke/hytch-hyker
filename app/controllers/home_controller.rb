@@ -4,8 +4,8 @@ class HomeController < ApplicationController
       @trips = Trip.all
 
       if !current_user.nil?
-        @user = current_user.email
-        @userid = current_user.__id__
+        @user = current_user.name
+        @userid = current_user.email
       end
     end
 
