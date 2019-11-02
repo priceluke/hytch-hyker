@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_112133) do
+ActiveRecord::Schema.define(version: 2019_10_31_134019) do
 
   create_table "homes", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_10_29_112133) do
     t.integer "vehicleCapacity"
     t.string "postcode"
     t.string "numberPlate"
+    t.boolean "is_admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

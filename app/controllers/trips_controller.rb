@@ -6,6 +6,7 @@ class TripsController < ApplicationController
   # GET /trips.json
   def index
     @trips = Trip.all
+
   end
 
   # GET /trips/1
@@ -28,7 +29,11 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     @trip.driver_id = current_user.email
     @recent_trip = Trip.order("created_at").last
-    @trip.trip_id = @recent_trip.trip_id + 1
+    if !Trip.first.nil?
+      @trip.trip_id = @recent_trip.trip_id + 1
+    else
+      @trip.trip_id = 1
+    end
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
@@ -57,6 +62,8 @@ class TripsController < ApplicationController
   # DELETE /trips/1
   # DELETE /trips/1.json
   def destroy
+    TripUser.where(:TripID => @trip.trip_id).destroy_all
+
     @trip.destroy
     respond_to do |format|
       format.html { redirect_to trips_url, notice: 'Trip was successfully destroyed.' }

@@ -1,10 +1,22 @@
 class TripUsersController < ApplicationController
-  before_action :set_trip_user, only: [:show, :edit, :update, :destroy]
+  before_action only: [:destroy]
+
+  def destroy
+    @trip_user = User.find(params[:id])
+
+    @trip_user.destroy
+    respond_to do |format|
+      format.html { redirect_to trip_users_url, notice: 'Trip user was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+  before_action :set_trip_user, only: [:show, :edit, :update]
 
   # GET /trip_users
   # GET /trip_users.json
   def index
     @trip_users = TripUser.all
+
   end
 
   # GET /trip_users/1
@@ -53,13 +65,7 @@ class TripUsersController < ApplicationController
 
   # DELETE /trip_users/1
   # DELETE /trip_users/1.json
-  def destroy
-    @trip_user.destroy
-    respond_to do |format|
-      format.html { redirect_to trip_users_url, notice: 'Trip user was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

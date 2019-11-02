@@ -3,12 +3,11 @@ class HomeController < ApplicationController
     def index
       @trips = Trip.all
 
-      if !current_user.nil?
-        @user = current_user.name
-        @userid = current_user.email
-      end
-    end
 
+    end
+  def myaccount
+
+  end
   def contact
 
   end

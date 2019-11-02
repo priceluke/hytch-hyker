@@ -1,13 +1,13 @@
+<%# SETUP FOR /SHOW/:id        %>
+<%# IS USER THE OWNER OF TRIP? %>   <% owner = is_owner(@trip, current_user) %>
+<%# IS USER A PASSENGER?       %>   <% passenger = is_passenger(@trip, current_user) %>
+<%# WHO ARE THE PASSENGERS?    %>   <% passengers = TripUser.find_by_sql("SELECT * FROM trip_users INNER JOIN users ON trip_users.PassengerID = users.email WHERE trip_users.TripID = " + @trip.trip_id.to_s)%>
+<%# WHO IS THE DRIVER?         %>   <% driver = get_driver_details(@trip) %>
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Driver:</strong>
-  <%= @trip.driver_id %>
-</p>
-
-<p>
-  <strong>Trip:</strong>
-  <%= @trip.trip_id %>
+  <%= driver.name %>
 </p>
 
 <p>
@@ -26,8 +26,7 @@
 </p>
 
 <p>
-  <strong>Petrolcost:</strong>
-  <%= @trip.petrolcost %>
+  <strong>Petrolcost: </strong>£<%= @trip.petrolcost %>
 </p>
 
 <p>
@@ -35,17 +34,28 @@
   <%= @trip.description %>
 </p>
 
+<%  if owner %>
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+ <%= link_to 'Remove', @trip, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%end %> | <% if !passenger && !owner %><%= link_to "Join", controller: "trip_users", action: "new", trip_id: @trip.trip_id, passenger_id: current_user.email %> | <%end %></td>
+  <%= link_to 'Back', trips_path %>
 
-<%
-  passengers = TripUser.find_by_sql("SELECT * FROM trip_users INNER JOIN users ON trip_users.PassengerID = users.email")
-%><br>There is currently
-<%=  passengers.to_a.count %> passengers.
+<br>There is currently
+<%=  passengers.to_a.count %> passengers. <%= driver.vehicleCapacity - passengers.to_a.count %> Seats Remain in <%= driver.name %>'s car.
 
+The more people that join, the cheaper the journey! As it stands, each person will have to pay £<%= @trip.petrolcost / (passengers.to_a.count + 1)  %> but this could fall to £<%= @trip.petrolcost / ( driver.vehicleCapacity ) %> if the car gets filled.
 <% passengers.each do |trip_users| %>
   <%= trip_users.name %>
+  <% @trip_user = trip_users %>
 
+  <% if owner %>
+    <%= trip_users.email %><br><%= trip_users.contactNumber %><br><%= trip_users.message %>
+    <%= link_to 'Kick', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete %>
 
+  <% end %>
+ <% if trip_users.PassengerID == current_user.email %>
+    <%= link_to 'Leave', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete %>
+
+  <% end %>
 <% end %>
 

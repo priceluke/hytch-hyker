@@ -10,7 +10,7 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        width: 25%;
+        width: 15%;
         background-color: #f1f1f1;
         position: fixed;
         height: 100%;
@@ -56,7 +56,9 @@
 
     <form class="form-inline">
       <% if user_signed_in? %>
-        <span class="btn btn-outline-primary" role="button">
+        <span class="btn btn-outline-primary" style="margin-right:10px;" role="button">
+<%= link_to "My Account", "/home/myaccount" %>        </span>
+        <span class="btn btn-outline-success" style="padding-left: 10px;" role="button">
 <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>        </span>
         <%else %>
         <a class="btn btn-outline-primary" href="users/sign_in" role="button">
@@ -81,16 +83,16 @@
     <li><%= link_to "About", "/about/" %></li>
   </ul>
 
-  <div style="margin-left:25%;padding:1px 16px;height:1000px;">
+  <div style="margin-left:15%;padding:1px 16px;height:1000px;">
   <%= yield %>
   </div>
 
   </body>
   <div class="footer">
     <% if user_signed_in? %>
-      <p>Logged in as: <%= @user %></p>
+      <p>Logged in as: <%= link_to current_user.name, home_myaccount_path, method: "get" %></p>
       <% end %>
-  <p>Ruby on Rails - Luke Price - 2019</p>
+  <p>Journeys Made: <%=  Trip.all.count %> Lifts Given: <%=  TripUser.all.count %></p>
   </div>
 </html>
 <p class="notice"><%= notice %></p>

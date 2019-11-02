@@ -27,12 +27,15 @@
         <td><%= trip.petrolcost %></td>
         <td><%= trip.description %></td>
         <td><%= link_to 'Show', trip %></td>
+        <% if is_owner(trip, current_user) %>
         <td><%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% join_trip_object = trip %>
-        <%# ><td><%= link_to 'Edit', edit_trip_path(trip) %></td>%>
-        #link_to "Profile", controller: "profiles", action: "show", id: @profile
+          <% end %>
+        <%# ><td><%= link_to 'Edit', edit_trip_path(trip) %></td>
 
-        <td><%= link_to "Join", controller: "trip_users", action: "new", trip_id:trip.trip_id, passenger_id: current_user.email %></td>
+        <td><%  if !current_user.nil? %>
+            <% if !is_owner(trip, current_user) && !is_passenger(trip, current_user) %>
+            <%= link_to "Join", controller: "trip_users", action: "new", trip_id:trip.trip_id, passenger_id: current_user.email %><%end %></td>
+            <% end %>
       </tr>
     <% end %>
   </tbody>

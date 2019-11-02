@@ -25,8 +25,12 @@
     <%= f.text_field :name, autofocus: true %>
   </div>
   <div>
+    <%= f.label :vehicleCapacity + "(Including Driver)"%><br />
+    <%= f.number_field :vehicleCapacity, autofocus: true %>
+  </div>
+  <div>
     <%= f.label :dob %><br />
-    <%= f.date_select :dob, autofocus: true %>
+    <%= f.date_select :dob, start_year: 1950 %>
   </div>
   <div>
     <%= f.label :contactNumber %><br />
