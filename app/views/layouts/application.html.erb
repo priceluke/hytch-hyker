@@ -2,37 +2,6 @@
 <html>
   <head>
   <style>
-    body {
-        margin: 0;
-    }
-
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        width: 15%;
-        background-color: #f1f1f1;
-        position: fixed;
-        height: 100%;
-        overflow: auto;
-    }
-
-    li a {
-        display: block;
-        color: #000;
-        padding: 8px 16px;
-        text-decoration: none;
-    }
-
-    li a.active {
-        background-color: #4CAF50;
-        color: white;
-    }
-
-    li a:hover:not(.active) {
-        background-color: #555;
-        color: white;
-    }
       .footer {
         position: fixed;
         left: 0;
@@ -52,21 +21,17 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <nav  class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/">HytchHyker</a>
-
-    <form class="form-inline">
+    <a class="navbar-brand" href="/"><img src="<%= image_path("raw_logo.png") %>" width="150px" style="margin-left:45%;" /></a><form class="form-inline">
       <% if user_signed_in? %>
-        <span class="btn btn-outline-primary" style="margin-right:10px;" role="button">
-<%= link_to "My Account", "/home/myaccount" %>        </span>
-        <span class="btn btn-outline-success" style="padding-left: 10px;" role="button">
-<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>        </span>
+<%= link_to "My Account", "/home/myaccount", class: "btn btn-outline-primary", role: "button"%>&ensp;
+<%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-primary", role: "button" %>
         <%else %>
         <a class="btn btn-outline-primary" href="users/sign_in" role="button">
         Login
          </a>
 
       <div style="padding-left: 10px;">
-        <a class="btn btn-outline-success" href="users/sign_up" role="button">
+        <a class="btn btn-outline-primary" href="users/sign_up" role="button">
           Sign Up
         </a>
       </div>
@@ -75,15 +40,35 @@
     </form>
   </nav>
   <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <ul>
-    <li><%= link_to "Browse", "/trips/" %></li>
-    <li><%= link_to "Post", "/trips/new" %></li>
-    <li><%= link_to "Contact", "/contact/" %></li>
-    <li><%= link_to "About", "/about/" %></li>
-  </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to "Browse", "/trips/", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Post", "/trips/new", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Contact", "/contact", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "About", "/about", class: "nav-link" %>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
 
-  <div style="margin-left:15%;padding:1px 16px;height:1000px;">
+  <div style="margin:2%;;">
   <%= yield %>
   </div>
 

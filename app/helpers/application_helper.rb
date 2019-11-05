@@ -22,4 +22,9 @@ module ApplicationHelper
   def get_driver_details (trip)
     return User.find_by_email(trip.driver_id)
   end
+  def age(dob)
+    val_age = Date.today.year - dob.year
+    val_age -= 1 if Date.today < dob + val_age.years #for days before birthday
+    return val_age
+  end
 end

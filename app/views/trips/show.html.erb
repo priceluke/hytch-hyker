@@ -4,57 +4,48 @@
 <%# WHO ARE THE PASSENGERS?    %>   <% passengers = TripUser.find_by_sql("SELECT * FROM trip_users INNER JOIN users ON trip_users.PassengerID = users.email WHERE trip_users.TripID = " + @trip.trip_id.to_s)%>
 <%# WHO IS THE DRIVER?         %>   <% driver = get_driver_details(@trip) %>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Driver:</strong>
-  <%= driver.name %>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title"><%= @trip.source %> to <%= @trip.destination %></h4>
+    <h6 class="card-subtitle mb-2 text-muted"><%= @trip.when %></h6>
+    <p class="card-text">
+      Total petrol cost of £<%= @trip.petrolcost %>. Driver is   <%= driver.name %>.
+    </p>
+  </div>
+    <div class="card-footer"><%= @trip.description %></div></div>
+<br>
+<div class="card">
+  <div class="card-body">
+    <p class="card-text">
+    The more people that join, the cheaper the journey! As it stands, each person will have to pay £<%= @trip.petrolcost / (passengers.to_a.count + 1)  %> but this could fall to £<%= @trip.petrolcost / ( driver.vehicleCapacity ) %> if the car gets filled.
 </p>
+  </div>
+  <div class="card-footer">
+There is currently
+<%=  passengers.to_a.count %> passengers. <%= driver.vehicleCapacity - passengers.to_a.count %> Seats Remain in <%= driver.name %>'s car.</div>
+</div><br>
+    <div class="card">
+      <div class="card-body">
 
-<p>
-  <strong>When:</strong>
-  <%= @trip.when %>
-</p>
+      <%  if owner %>
+        <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-outline-primary" %>
+        <%= link_to 'Remove', @trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary" %>
+      <%end %>  <% if !passenger && !owner %><%= link_to "Join", {controller: "trip_users", action: "new", trip_id: @trip.trip_id, passenger_id: current_user.email}, class: "btn btn-outline-primary" %> <%end %></td>
+      <%= link_to 'Back', trips_path, class: "btn btn-outline-primary" %>
+      </div>
+    </div>
 
-<p>
-  <strong>Destination:</strong>
-  <%= @trip.destination %>
-</p>
-
-<p>
-  <strong>Source:</strong>
-  <%= @trip.source %>
-</p>
-
-<p>
-  <strong>Petrolcost: </strong>£<%= @trip.petrolcost %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @trip.description %>
-</p>
-
-<%  if owner %>
-<%= link_to 'Edit', edit_trip_path(@trip) %> |
- <%= link_to 'Remove', @trip, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%end %> | <% if !passenger && !owner %><%= link_to "Join", controller: "trip_users", action: "new", trip_id: @trip.trip_id, passenger_id: current_user.email %> | <%end %></td>
-  <%= link_to 'Back', trips_path %>
-
-<br>There is currently
-<%=  passengers.to_a.count %> passengers. <%= driver.vehicleCapacity - passengers.to_a.count %> Seats Remain in <%= driver.name %>'s car.
-
-The more people that join, the cheaper the journey! As it stands, each person will have to pay £<%= @trip.petrolcost / (passengers.to_a.count + 1)  %> but this could fall to £<%= @trip.petrolcost / ( driver.vehicleCapacity ) %> if the car gets filled.
-<% passengers.each do |trip_users| %>
+  <% passengers.each do |trip_users| %>
   <%= trip_users.name %>
   <% @trip_user = trip_users %>
 
   <% if owner %>
     <%= trip_users.email %><br><%= trip_users.contactNumber %><br><%= trip_users.message %>
-    <%= link_to 'Kick', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete %>
+    <%= link_to 'Kick', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
 
   <% end %>
  <% if trip_users.PassengerID == current_user.email %>
-    <%= link_to 'Leave', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete %>
+    <%= link_to 'Leave', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
 
   <% end %>
 <% end %>

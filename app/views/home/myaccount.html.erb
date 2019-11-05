@@ -1,33 +1,43 @@
-<%= @user
-
+<%
+  mytrips = TripUser.find_by_sql("SELECT * FROM trip_users INNER JOIN users ON trip_users.PassengerID = users.email INNER JOIN trips ON trip_users.TripID = trips.trip_id WHERE users.email='" + current_user.email + "'")
 %>
-<br>
+<%
+  postedtrips = Trip.find_by_sql("SELECT * FROM trips INNER JOIN users ON trips.driver_id = users.email WHERE users.email='" + current_user.email + "'")
+%>
+<div class="card text-center">
+<div class="card-header">Welcome to your HytchHyker Dashboard!
+</div>
+<div class="card-body">
+  <h3 class="card-title"><%= current_user.name %><br><h5><%= current_user.email %><h5>
+  </h3>
+  You've posted
+  <%=  postedtrips.to_a.count %> Journeys.<br>You've booked
+  <%=  mytrips.to_a.count %> Journeys.
+  <br>  <%= link_to "Change your password", edit_user_registration_path, :class => "btn btn-primary" %><br>
+
+</div>
+<div class="card-footer text-muted">
+  User Type:
+    <% if current_user.is_admin?%><% %>
+      Administrator<%else %>Standard User
+  <% end %></div>
+</div>
+
 <%= current_user.email %><br>
-<%= current_user.dob %><br>
-<%= link_to "Change your password", edit_user_registration_path %><br>
+<br>
+<br>
 <%= current_user.created_at %><br>
 
 
-<%
-  mytrips = TripUser.find_by_sql("SELECT * FROM trip_users INNER JOIN users ON trip_users.PassengerID = users.email INNER JOIN trips ON trip_users.TripID = trips.trip_id WHERE users.email='" + current_user.email + "'")
-%><br>You've booked
-<%=  mytrips.to_a.count %> Journeys.
+
 <br>
 <% mytrips.each do |trip_users| %>
   <%= trip_users.source %> to  <%= trip_users.destination %> on  <%= trip_users.when %><%= link_to 'Show', trip_path(trip_users.trip_id) %><br>
 <%end %>
 
-<%
-  mytrips = Trip.find_by_sql("SELECT * FROM trips INNER JOIN users ON trips.driver_id = users.email WHERE users.email='" + current_user.email + "'")
-%><br>You've posted
-<%=  mytrips.to_a.count %> Journeys.
-<br>
-<% mytrips.each do |trip| %>
+
+<% postedtrips.each do |trip| %>
   <%= trip.source %> to  <%= trip.destination %> on  <%= trip.when %>  <%= link_to 'Show', trip_path(trip.trip_id) %><br>
   The Trip currently has <%=    TripUser.find_by_sql("SELECT * FROM trip_users WHERE TripID=" + trip.trip_id.to_s).length %> passenger.
 <%end %>
-<p>User Type:
-<% if current_user.is_admin?%><% %>
-Administrator<%else %>Standard User
-<% end %>
-</p>
+

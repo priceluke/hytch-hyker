@@ -11,32 +11,30 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :when %>
-    <%= form.datetime_select :when %>
+    <%= form.datetime_select :when, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :destination %>
-    <%= form.text_field :destination %>
+    <%= form.text_field :destination, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :source %>
-    <%= form.text_field :source %>
+    <%= form.text_field :source, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :petrolcost %>
-    <%= form.number_field :petrolcost %>
+    <%= form.number_field :petrolcost, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <%= form.submit "Post", :class => "btn btn-outline-primary" %>
 <% end %>

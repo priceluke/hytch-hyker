@@ -11,10 +11,9 @@
     <h3>Saving you money on travel costs by sharing with other users</h3>
     <p>Simply head over to our Browse page and find other users to share with!</p>
     <p>Here are some recently posted journeys that might interest you:</p>
-    <table style="width:100%;">
+    <table style="width:80%;" class="table">
       <thead>
       <tr>
-        <th>Driver</th>
         <th>When</th>
         <th>Destination</th>
         <th>Source</th>
@@ -27,11 +26,11 @@
       <tbody>
       <% @trips.each do |trip| %>
         <tr>
-          <td><%= trip.driver_id %></td>
           <td><%= trip.when %></td>
           <td><%= trip.destination %></td>
           <td><%= trip.source %></td>
           <td><%= trip.petrolcost %></td>
+          <td><%= trip.description %></td>
           <td><%= link_to 'Show', trip %></td>
         </tr>
       <% end %>
