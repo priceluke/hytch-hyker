@@ -1,14 +1,90 @@
 <p id="notice"><%= notice %></p>
+<script>function addRow(trip)
+{
+    if (!document.getElementsByTagName) return;
+    var tabBody = document.getElementsByTagName("tbody").item(0);
+    var row = document.createElement("tr");
 
+    var textnode1 = document.createElement("td").appendChild(document.createTextNode(trip["when"]));
+    var textnode2 = document.createElement("td").appendChild(document.createTextNode(trip["destination"]));
+    var textnode3 = document.createElement("td").appendChild(document.createTextNode(trip["source"]));
+    var textnode4 = document.createElement("td").appendChild(document.createTextNode(trip["petrol_cost"]));
+    var textnode5 = document.createElement("td").appendChild(document.createTextNode(trip["desc"]));
+
+    row.appendChild(textnode1);
+    row.appendChild(textnode2);
+    row.appendChild(textnode3);
+    row.appendChild(textnode4);
+    row.appendChild(textnode5);
+    tabBody.appendChild(row);
+
+}
+
+//Create list of Trips
+    trips = [<% @trips.each do |trip| %>
+        {"when" : "<%= trip.when %>", "destination" : "<%= trip.destination %>", "source" : "<%= trip.source %>", "petrol_cost" : <%= trip.petrolcost %>, "desc" : "<%= trip.description %>"}, <% end %>];
+</script>
 <h1>Trips</h1>
+<div class="card card-body bg-light">
+  <form class="new_filterrific" id="filterrific_filter" action="/students" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓"><div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="font-weight-bold">Search</label>
+        <input class="filterrific-periodically-observed form-control" type="text" name="filterrific[search_query]" id="filterrific_search_query">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="font-weight-bold">Country</label>
+        <select class="form-control" name="filterrific[with_country_id]" id="filterrific_with_country_id"><option value="">- Any -</option>
+          <option value="19">Australia</option>
+          <option value="18">Canada</option>
+          <option value="23">Ireland</option>
+          <option value="21">New Zealand</option>
+          <option value="22">Puerto Rico</option>
+          <option value="20">South Africa</option>
+          <option value="24">United Kingdom</option>
+          <option value="17">United States</option></select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label class="font-weight-bold">Registered after</label>
+      <input id="filterrific_with_created_at_gte" class="form-control datetimepicker-input" data-target="#filterrific_with_created_at_gte" data-toggle="datepicker" value="" type="text" name="filterrific[with_created_at_gte]">
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label class="font-weight-bold">Sorted by</label>
+        <select class="form-control" name="filterrific[sorted_by]" id="filterrific_sorted_by"><option value="name_asc">Name (a-z)</option>
+          <option selected="selected" value="created_at_desc">Registration date (newest first)</option>
+          <option value="created_at_asc">Registration date (oldest first)</option>
+          <option value="country_name_asc">Country (a-z)</option></select>
+      </div>
+    </div>
+  </div>
+  </form></div>
 
-<table class="table">
+<div class="card card-body bg-light d-block p-3 my-3">
+  <div class="row">
+    <div class="col-md-10">
+      Displaying Trips <b>991&nbsp;-&nbsp;1000</b> of <b></b> in total
+    </div>
+    <div class="col-md-2">
+      <a class="btn btn-secondary align-middle" href="/students?filterrific%5Breset_filterrific%5D=true">Reset filters</a>
+    </div>
+  </div>
+
+  <span class="filterrific_spinner" style="display:none;">
+          <img src="/assets/filterrific/filterrific-spinner-c1cf81bef2ea82eaa43265a5ff786b7cd74e7d5f4f2de104b586f092ca0fb886.gif">
+        </span>
+
+</div>
+<table class="table" id="trip_table">
   <thead>
     <tr>
       <th>When</th>
       <th>Destination</th>
       <th>Source</th>
-      <th>Petrolcost</th>
+      <th>Petrol Cost</th>
       <th>Description</th>
       <th colspan="2"> </th>
     </tr>
@@ -35,7 +111,7 @@
               <%= link_to 'Show', trip, class: "dropdown-item" %>
               <%  if !current_user.nil? %>
                 <% if is_owner(trip, current_user) %><%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %><% end %>
-              <% if !is_owner(trip, current_user) && !is_passenger(trip, current_user) %><%= link_to "Join" , {action: "new", trip_id:trip.trip_id, passenger_id: current_user.email}, class: "dropdown-item" %><%end %><% end %>
+              <% if !is_owner(trip, current_user) && !is_passenger(trip, current_user) %><%= link_to "Join", {controller: "trip_users",action: "new", trip_id:trip.trip_id, passenger_id: current_user.email}, class: "dropdown-item" %><%end %><% end %>
             </div>
           </div>
 
@@ -47,7 +123,7 @@
 </table>
 
 <br>
-
+<script>addRow(trips[0]);</script>
 <%= link_to 'New Trip', new_trip_path, class: "btn btn-outline-primary" %>
 
 

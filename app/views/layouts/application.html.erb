@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <style>
-      .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: #f8f9fa !important;
-        color: black;
-        text-align: center;
-        padding:10px;
-      }
-    </style>
-    <title>HytchHyker</title>
+     <title>HytchHyker</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -73,12 +61,19 @@
   </div>
 
   </body>
-  <div class="footer">
-    <% if user_signed_in? %>
-      <p>Logged in as: <%= link_to current_user.name, home_myaccount_path, method: "get" %></p>
-      <% end %>
-  <p>Journeys Made: <%=  Trip.all.count %> Lifts Given: <%=  TripUser.all.count %></p>
-  </div>
+  <!-- Footer -->
+  <!-- Footer -->
+  <footer class="page-footer font-small blue">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="https://mdbootstrap.com/education/bootstrap/"> HytchHyker.com</a>
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
+  <!-- Footer -->
 </html>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>

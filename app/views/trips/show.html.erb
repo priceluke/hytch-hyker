@@ -24,6 +24,43 @@
 There is currently
 <%=  passengers.to_a.count %> passengers. <%= driver.vehicleCapacity - passengers.to_a.count %> Seats Remain in <%= driver.name %>'s car.</div>
 </div><br>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
+  <tr>
+    <th>Name</th>
+    <th>Phone Number</th>
+    <th>Email</th>
+    <th>Message</th>
+    <th>Manage</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% passengers.each do |trip_users| %>
+    <% @trip_user = trip_users %>
+
+
+
+  <tr>
+    <td><%= trip_users.name %>
+    </td>
+    <td><%= trip_users.contactNumber %></td>
+    <td><%= trip_users.email %></td>
+    <td><%= trip_users.message %></td>
+    <td> <% if owner %>
+        <%= link_to 'Kick', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
+
+      <% end %>
+      <% if trip_users.PassengerID == current_user.email %>
+        <%= link_to 'Leave', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
+
+      <% end %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
     <div class="card">
       <div class="card-body">
 
@@ -35,18 +72,5 @@ There is currently
       </div>
     </div>
 
-  <% passengers.each do |trip_users| %>
-  <%= trip_users.name %>
-  <% @trip_user = trip_users %>
 
-  <% if owner %>
-    <%= trip_users.email %><br><%= trip_users.contactNumber %><br><%= trip_users.message %>
-    <%= link_to 'Kick', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
-
-  <% end %>
- <% if trip_users.PassengerID == current_user.email %>
-    <%= link_to 'Leave', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
-
-  <% end %>
-<% end %>
 
