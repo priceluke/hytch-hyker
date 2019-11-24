@@ -11,15 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.number_field :TripID, hidden: true, value:  params[:trip_id] %>
-  </div>
 
-  <div class="field">
-    <%= form.label :PassengerID %>
-    <%= form.text_field :PassengerID, hidden: true, value: params[:passenger_id] %>
-  </div>
-#f.text_field :nome, class: "form-control", disabled: true?
   <div class="field">
     <%= form.label :message %>
     <%= form.text_area :message %>

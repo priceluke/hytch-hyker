@@ -2,11 +2,11 @@ class TripUsersController < ApplicationController
   before_action only: [:destroy]
 
   def destroy
-    @trip_user = User.find(params[:id])
+    @trip_user = TripUser.find(params[:id])
 
     @trip_user.destroy
     respond_to do |format|
-      format.html { redirect_to trip_users_url, notice: 'Trip user was successfully destroyed.' }
+      format.html { redirect_to home_myaccount_path, notice: 'Trip user was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -37,10 +37,9 @@ class TripUsersController < ApplicationController
   # POST /trip_users.json
   def create
     @trip_user = TripUser.new(trip_user_params)
-    @tripID = 1
     respond_to do |format|
       if @trip_user.save
-        format.html { redirect_to @trip_user, notice: 'Trip user was successfully created.' }
+        format.html { redirect_to edit_trip_user_path(@trip_user), notice: 'Trip user was successfully created.' }
         format.json { render :show, status: :created, location: @trip_user }
       else
         format.html { render :new }
@@ -54,7 +53,7 @@ class TripUsersController < ApplicationController
   def update
     respond_to do |format|
       if @trip_user.update(trip_user_params)
-        format.html { redirect_to @trip_user, notice: 'Trip user was successfully updated.' }
+        format.html { redirect_to home_myaccount_path, notice: 'Trip user was successfully updated.' }
         format.json { render :show, status: :ok, location: @trip_user }
       else
         format.html { render :edit }
@@ -75,6 +74,6 @@ class TripUsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_user_params
-      params.require(:trip_user).permit(:TripID, :PassengerID, :message)
+      params.permit(:TripID, :PassengerID, :message)
     end
 end

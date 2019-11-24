@@ -37,10 +37,9 @@ There is currently
   </thead>
   <tbody>
   <% passengers.each do |trip_users| %>
+    <%# GET TRIP_USER  OBJ%><% @trip_user_object =  TripUser.where(:PassengerID => trip_users.email, :TripID => @trip.trip_id).first  %>
+
     <% @trip_user = trip_users %>
-
-
-
   <tr>
     <td><%= trip_users.name %>
     </td>
@@ -48,11 +47,11 @@ There is currently
     <td><%= trip_users.email %></td>
     <td><%= trip_users.message %></td>
     <td> <% if owner %>
-        <%= link_to 'Kick', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
+        <%= link_to 'Kick', trip_user_path(@trip_user_object) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
 
       <% end %>
       <% if trip_users.PassengerID == current_user.email %>
-        <%= link_to 'Leave', trip_user_path(@trip_user.id) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
+        <%= link_to 'Leave', trip_user_path(@trip_user_object) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
 
       <% end %></td>
   </tr>
@@ -67,7 +66,9 @@ There is currently
       <%  if owner %>
         <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-outline-primary" %>
         <%= link_to 'Remove', @trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary" %>
-      <%end %>  <% if !passenger && !owner %><%= link_to "Join", {controller: "trip_users", action: "new", trip_id: @trip.trip_id, passenger_id: current_user.email}, class: "btn btn-outline-primary" %> <%end %></td>
+      <%end %>  <% if !passenger && !owner %>
+          <%= link_to "Join", trip_users_path(:PassengerID => current_user.email, :TripID => @trip.trip_id, :message => "I'd love to join you on this trip!"), :method => :post, action: "create", class: "btn btn-outline-primary" %>
+        <%end %></td>
       <%= link_to 'Back', trips_path, class: "btn btn-outline-primary" %>
       </div>
     </div>
