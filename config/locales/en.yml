@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  request_contact:
+      no_email: You need to enter an email address!
+      email_sent: Your message has been recived!

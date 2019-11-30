@@ -13,9 +13,15 @@
 
   <div class="form-group">
     <%= form.label :when %>
-    <%= form.datetime_select :when, class: "form-control" %>
+    <%= form.text_field :when, class: "form-control", id: "dtp_select" %>
   </div>
-
+  <script>
+      laydate.render({
+          elem: '#dtp_select', // element selector
+          type: 'datetime',
+          lang: 'en' // default is Chinese version, use en for english
+      });
+  </script>
   <div class="form-group">
     <%= form.label :destination %>
     <%= form.text_field :destination, class: "form-control" %>
@@ -37,4 +43,6 @@
   </div>
 
     <%= form.submit "Post", :class => "btn btn-outline-primary" %>
+  <%= link_to 'Back', trips_path,:class => "btn btn-outline-primary" %>
+
 <% end %>

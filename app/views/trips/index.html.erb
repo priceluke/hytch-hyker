@@ -1,5 +1,73 @@
 <p id="notice"><%= notice %></p>
+<style>@media (min-width: 768px) {
+  .form-search .combobox-container,
+  .form-inline .combobox-container {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: top;
+  }
+  .form-search .combobox-container .input-group-addon,
+  .form-inline .combobox-container .input-group-addon {
+    width: auto;
+  }
+}
 
+.combobox-selected .caret {
+  display: none;
+}
+
+
+/* :not doesn't work in IE8 */
+
+.combobox-container:not(.combobox-selected) .glyphicon-remove {
+  display: none;
+}
+
+.typeahead-long {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.control-group.error .combobox-container .add-on {
+  color: #B94A48;
+  border-color: #B94A48;
+}
+
+.control-group.error .combobox-container .caret {
+  border-top-color: #B94A48;
+}
+
+.control-group.warning .combobox-container .add-on {
+  color: #C09853;
+  border-color: #C09853;
+}
+
+.control-group.warning .combobox-container .caret {
+  border-top-color: #C09853;
+}
+
+.control-group.success .combobox-container .add-on {
+  color: #468847;
+  border-color: #468847;
+}
+
+.control-group.success .combobox-container .caret {
+  border-top-color: #468847;
+}</style>
+  <div class="row">
+    <div class="col-sm-3">
+      <select class="form-control" id="search_col" onchange="search()">
+        <option value="1">Destination</option>
+        <option value="2">Source</option>
+        <option value="0">Date</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+
+    <input type="text" id="searchParam" onkeyup="search()" class="form-control" placeholder="Search.." title="Search Box">
+    </div>
+  </div>
+  <br />
 <table class="table" id="trip_table">
   <thead>
     <tr>
@@ -45,7 +113,30 @@
 </table>
 
 <br>
-<script>addRow(trips[0]);</script>
+<script>
+
+  function search() {
+      filterFunction(document.getElementById("search_col").value);
+  }
+    function filterFunction(column) {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchParam");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("trip_table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[column];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 <%= link_to 'New Trip', new_trip_path, class: "btn btn-outline-primary" %>
 
 

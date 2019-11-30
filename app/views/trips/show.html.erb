@@ -3,7 +3,6 @@
 <%# IS USER A PASSENGER?       %>   <% passenger = is_passenger(@trip, current_user) %>
 <%# WHO ARE THE PASSENGERS?    %>   <% passengers = TripUser.find_by_sql("SELECT * FROM trip_users INNER JOIN users ON trip_users.PassengerID = users.email WHERE trip_users.TripID = " + @trip.trip_id.to_s)%>
 <%# WHO IS THE DRIVER?         %>   <% driver = get_driver_details(@trip) %>
-<p id="notice"><%= notice %></p>
 <div class="card">
   <div class="card-body">
     <h4 class="card-title"><%= @trip.source %> to <%= @trip.destination %></h4>

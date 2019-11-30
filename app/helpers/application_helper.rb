@@ -27,4 +27,5 @@ module ApplicationHelper
     val_age -= 1 if Date.today < dob + val_age.years #for days before birthday
     return val_age
   end
+
 end
