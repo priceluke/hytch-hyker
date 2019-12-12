@@ -12,11 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_10_31_134019) do
 
-  create_table "homes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "trip_users", force: :cascade do |t|
     t.integer "TripID"
     t.string "PassengerID"

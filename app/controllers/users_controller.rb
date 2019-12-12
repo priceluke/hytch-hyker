@@ -14,9 +14,5 @@ class UsersController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def is_admin
-    if !current_user.is_admin?
-      redirect_to home_myaccount_path
-    end
-  end
+
 end

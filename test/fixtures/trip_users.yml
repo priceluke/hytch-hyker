@@ -2,10 +2,10 @@
 
 one:
   TripID: 1
-  PassengerID: MyString
-  message: MyText
+  PassengerID: angela@allsafe.com
+  message: hello world
 
 two:
-  TripID: 1
-  PassengerID: MyString
-  message: MyText
+  TripID: 2
+  PassengerID: angela@allsafe.com
+  message: hello world

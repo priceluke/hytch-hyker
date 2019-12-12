@@ -4,6 +4,32 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
+  #
+  setup do
+    #@user = (:one)
+    @user = users(:one)
+  end
+
+  # called after every single test
+  teardown do
+    # when controller is using cache it may be a good idea to reset it afterwards
+  end
+  include Devise::Test::IntegrationHelpers
+
+  test "login and view myaccount" do
+    sign_in users(:one)
+
+    get '/home/myaccount'
+    assert_response :success
+  end
+
+
+
+
+  test "no access to myaccount if not logged in" do
+    get home_myaccount_url
+    assert_response :redirect
+  end
 
   test "should get contact" do
     get contact_url
@@ -31,5 +57,6 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_equal ['help@pricel.uk'], mail.to
     assert_equal ['contact@form.ac.uk'], mail.from
   end
+
 end
 

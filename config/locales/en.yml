@@ -31,6 +31,33 @@
 
 en:
   hello: "Hello world"
+  program:
+    name: HytchHyker
+    url: HytchHyker.com
+    year: 2019
+    cpy: Copyright
+    login: Login
+    signup: Sign Up
+    darkmode: Dark Mode
+    update: Update
+    warning: Warning
+    error: Oops, there are a few errors to fix
+  tripuser:
+    message: Add a Message
+  trip:
+    error: Darn it! Trip couldnt be saved
+    edit: Editing Trip
+  contact:
+    h1: Send us a Message
+    p: Having some trouble getting HytchHyker working? Send us a quick message below and we'll get back to you within 23 seconds.
+  index:
+    welcome: Welcome to HytchHyker
+    h3: Saving you money on travel costs by sharing with other users
+    p1: Simply head over to our Browse page and find other users to share with!
+    p2: Here are some recently posted journeys that might interest you
   request_contact:
       no_email: You need to enter an email address!
       email_sent: Your message has been recived!
+  myaccount:
+    welcome: Welcome to your HytchHyker Dashboard!
+    yourinfo: Your Information

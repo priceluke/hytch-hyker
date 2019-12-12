@@ -5,11 +5,11 @@
   postedtrips = Trip.find_by_sql("SELECT * FROM trips INNER JOIN users ON trips.driver_id = users.email WHERE users.email='" + current_user.email + "'")
 %>
 <div class="card text-center">
-<div class="card-header">Welcome to your HytchHyker Dashboard!
+<div class="card-header"><%= t('myaccount.welcome') %>
 </div>
 <div class="card-body">
-  <h3 class="card-title"><%= current_user.name %><br><h5><%= current_user.email %><h5>
-  </h3>
+  <h3 class="card-title"><%= current_user.name %></h3><br><h5><%= current_user.email %></h5>
+
   You've posted
   <%=  postedtrips.to_a.count %> Journeys.<br>You've booked
   <%=  mytrips.to_a.count %> Journeys.
@@ -55,7 +55,7 @@
 </div>
 <br>
 <div class="card text-center">
-  <div class="card-header">Your Information</div>
+  <div class="card-header"><%= t('myaccount.yourinfo') %></div>
   <div class="card-body">
     Account created on: <%= current_user.created_at %><br>
     User ID: <%= current_user.id %><br>

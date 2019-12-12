@@ -2,6 +2,7 @@ class TripUsersController < ApplicationController
   before_action only: [:destroy]
 
   def destroy
+
     @trip_user = TripUser.find(params[:id])
 
     @trip_user.destroy
@@ -14,18 +15,18 @@ class TripUsersController < ApplicationController
 
   # GET /trip_users
   # GET /trip_users.json
-  def index
-    @trip_users = TripUser.all
 
-  end
 
   # GET /trip_users/1
   # GET /trip_users/1.json
   def show
+    before_action :is_admin
+
   end
 
   # GET /trip_users/new
   def new
+    before_action :is_admin
     @trip_user = TripUser.new
   end
 
@@ -64,7 +65,12 @@ class TripUsersController < ApplicationController
 
   # DELETE /trip_users/1
   # DELETE /trip_users/1.json
+  before_action :is_admin
+  def index
 
+    @trip_users = TripUser.all
+
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -76,4 +82,6 @@ class TripUsersController < ApplicationController
     def trip_user_params
       params.permit(:TripID, :PassengerID, :message)
     end
+
+
 end

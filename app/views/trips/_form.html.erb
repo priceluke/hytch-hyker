@@ -1,7 +1,7 @@
 <%= form_with(model: trip, local: true) do |form| %>
   <% if trip.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+    <div class="alert alert-danger" role="alert">
+    <h2><%= t('trip.error') %>:</h2>
 
       <ul>
       <% trip.errors.full_messages.each do |message| %>

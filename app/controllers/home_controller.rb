@@ -1,13 +1,14 @@
 class HomeController < ApplicationController
 
+  before_action :authenticate_user!, :only => [:myaccount]
+
+
     def index
       @trips = Trip.all
 
 
     end
-  def myaccount
 
-  end
   def contact
 
   end
@@ -31,5 +32,9 @@ end
   def contact
 
   end
-  end
+
+    def myaccount
+
+    end
+end
 

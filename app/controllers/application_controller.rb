@@ -13,6 +13,14 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def is_admin
+    if current_user.nil?
+      redirect_to root_path
+
+    elsif !current_user.is_admin?
+      redirect_to home_myaccount_path
+    end
+  end
 end
 #    t.string "email", default: "", null: false
 #t.string "encrypted_password", default: "", null: false

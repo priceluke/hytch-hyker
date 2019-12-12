@@ -9,3 +9,28 @@
 #
 #two: {}
 # column: value
+one:
+  id: 1
+  email: elliot@allsafe.com
+  encrypted_password: $2a$11$XOzfdb7I12Zjpf.jQbOK8uQhGCzQU0zNNzPM2Nft6wyWDGLsBBT2a
+  UserID: 1
+  name: Elliot Alderson
+  dob: 2019-11-27 00:00:00
+  contactNumber: 02392344295
+  vehicleCapacity: 3
+  postcode: PO8 9ED
+  numberPlate: SM64 KKC
+  is_admin: true
+
+two:
+  id: 2
+  email: angela@allsafe.com
+  encrypted_password: $2a$11$XOzfdb7I12Zjpf.jQbOK8uQhGCzQU0zNNzPM2Nft6wyWDGLsBBT2a
+  UserID: 2
+  name: Angela Alderson
+  dob: 2019-11-27 00:00:00
+  contactNumber: 02392344295
+  vehicleCapacity: 3
+  postcode: PO8 9ED
+  numberPlate: SM64 KKC
+  is_admin: false

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-     <title>HytchHyker</title>
+     <title><%= t('program.name') %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,23 +9,28 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <nav  class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/"><img src="<%= image_path("raw_logo.png") %>" width="150px" style="margin-left:45%;" /></a><form class="form-inline">
+    <a class="navbar-brand" href="/"><img src="<%= image_url("raw_logo.png") %>" width="150px" style="margin-left:45%;" id="logo"/></a><div class="form-inline">
+    <div style="padding-right: 10px;">
+      <button onclick="$('body').toggleClass('bgDark')" class="btn btn-outline-primary" >
+        <%= t('program.darkmode') %>
+      </button>
+    </div>
       <% if user_signed_in? %>
 <%= link_to "My Account", "/home/myaccount", class: "btn btn-outline-primary", role: "button"%>&ensp;
 <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-primary", role: "button" %>
         <%else %>
         <a class="btn btn-outline-primary" href="users/sign_in" role="button">
-        Login
+        <%= t('program.login') %>
          </a>
 
       <div style="padding-left: 10px;">
         <a class="btn btn-outline-primary" href="users/sign_up" role="button">
-          Sign Up
+          <%= t('program.signup') %>
         </a>
       </div>
             <% end %>
 
-    </form>
+    </div>
   </nav>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,41 +50,39 @@
         <li class="nav-item">
           <%= link_to "Contact", "/contact", class: "nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "About", "/about", class: "nav-link" %>
-        </li>
+
       </ul>
 
     </div>
   </nav>
 
-  <div style="margin:2%;;">
+  <div style="margin:2%;">
     <% if !notice.nil? %>
       <div class="alert alert-warning" role="alert">
-        <strong>Update!</strong> <%= notice %>.
+        <strong><%= t('program.update') %>!</strong> <%= notice %>.
       </div>
     <p class="notice"></p>
       <% end %>
     <% if !alert.nil? %>
       <div class="alert alert-warning" role="alert">
-        <strong>Warning!</strong> <%= alert %>.
+        <strong><%= t('program.warning') %>!</strong> <%= alert %>.
       </div>
     <% end %>
   <%= yield %>
   </div>
 
   </body>
-  <!-- Footer -->
-  <!-- Footer -->
+
   <footer class="page-footer font-small blue">
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2018 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/"> HytchHyker.com</a>
+    <div class="footer-copyright text-center py-3">© 2019 <%= t('program.cpy') %>:
+      <a href="<%= t('program.url') %>"><%= t('program.name') %></a>
     </div>
     <!-- Copyright -->
 
   </footer>
-  <!-- Footer -->
-  <!-- Footer -->
+<script>
+
+</script>
 </html>

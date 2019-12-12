@@ -18,3 +18,8 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require laydate
+
+//= require jquery
+//= require jquery_ujs
+
+

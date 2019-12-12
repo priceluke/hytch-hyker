@@ -1,5 +1,5 @@
-<h1>Send us a Message</h1>
-<p>Having some trouble getting HytchHyker working? Send us a quick message below and we'll get back to you within 23 seconds.</p>
+<h1><%= t('contact.h1') %></h1>
+<p><%= t('contact.p') %></p>
 <%= form_tag request_contact_path, method: 'post' do %>
   <%= label_tag :name, t('.name'), id: "form" %>
   <%= text_field_tag :name, '', title: t('.enter_name'), size: 50, class: "form-control" %><br>

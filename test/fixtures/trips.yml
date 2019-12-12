@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  driver_id: MyString
+  driver_id: elliot@allsafe.com
   trip_id: 1
   when: 2019-10-28 20:47:08
-  destination: MyString
-  source: MyString
-  petrolcost: 1
-  description: MyText
+  destination: Spain
+  source: France
+  petrolcost: 100
+  description: HelloWorld
 
 two:
-  driver_id: MyString
-  trip_id: 1
+  driver_id: elliot@allsafe.com
+  trip_id: 2
   when: 2019-10-28 20:47:08
-  destination: MyString
-  source: MyString
-  petrolcost: 1
-  description: MyText
+  destination: France
+  source: Spain
+  petrolcost: 100
+  description: ByeWorld
