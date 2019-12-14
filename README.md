@@ -37,6 +37,8 @@ The following command tests all aspects of the Rails app, including restricted r
 Contact mailer works as per lab /w customisation.
 ### Models: Validation
 All validation is done at the back end and the errors are passed back and displayed with bootstrap. All relationships have been declared and they function as required. Testing also included model tests. 
+### Models: Relationships
+The passengers join the trip_user table as the join the trip. All relationships are defined in the models.
 ### Code Style
 I have tried to keep with the community driven code style outlined below:
 [https://github.com/rubocop-hq/rails-style-guide](https://github.com/rubocop-hq/rails-style-guide)
@@ -48,7 +50,7 @@ Pushing everytime I made a significant change to the project.
 I have pulled out repeated functions to helpers to reduce code repetition.
 
 #Schema
-
+```
 Users
 	UserID*
 	Name
@@ -73,4 +75,4 @@ UserTrip
 	TripID*
 	PassengerID*
 	Message
-
+```

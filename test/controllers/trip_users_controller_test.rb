@@ -3,6 +3,7 @@ require 'test_helper'
 class TripUsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @trip_user = trip_users(:one)
+    @trip_user2 = trip_users(:two)
   end
 
   test "shouldnt get index" do
@@ -35,10 +36,20 @@ class TripUsersControllerTest < ActionDispatch::IntegrationTest
 
   test "shouldnt create trip_user" do
     assert_no_difference('TripUser.count') do
-      post trip_users_url, params: { trip_user: { PassengerID: @trip_user.PassengerID, TripID: @trip_user.TripID, message: @trip_user.message } }
+      post trip_users_url, params: { trip_user: { PassengerID:  @trip_user.PassengerID, TripID: 1, message: "hello world" } }
     end
 
     assert_redirected_to root_url
+  end
+
+  test "should create trip_user as admin" do
+    sign_in users(:one)
+
+    assert_difference('TripUser.count') do
+      post trip_users_url, params: { trip_user: { PassengerID: @trip_user.PassengerID, TripID: @trip_user.TripID, message: @trip_user.message } }
+    end
+
+    assert_response :redirect
   end
 
   test "should show trip_user" do

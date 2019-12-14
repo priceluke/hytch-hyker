@@ -61,3 +61,7 @@ en:
   myaccount:
     welcome: Welcome to your HytchHyker Dashboard!
     yourinfo: Your Information
+  home:
+    request_contact:
+      email_sent: Your email has been sent, we will get back to you shortly!
+      no_email: You didn't provide an email Address!

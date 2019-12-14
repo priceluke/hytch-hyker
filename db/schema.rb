@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_31_134019) do
+ActiveRecord::Schema.define(version: 2019_12_14_170443) do
 
   create_table "trip_users", force: :cascade do |t|
     t.integer "TripID"

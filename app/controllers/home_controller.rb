@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 
 
     def index
-      @trips = Trip.all
+      @trips = Trip.all.take(8)
 
 
     end

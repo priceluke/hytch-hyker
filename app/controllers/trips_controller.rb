@@ -27,7 +27,9 @@ class TripsController < ApplicationController
   # POST /trips.json
   def create
     @trip = Trip.new(trip_params)
-    @trip.driver_id = current_user.email
+    if (!current_user.nil?)
+      @trip.driver_id = current_user.email
+    end
     @recent_trip = Trip.order("created_at").last
     if !Trip.first.nil?
       @trip.trip_id = @recent_trip.trip_id + 1
@@ -72,13 +74,14 @@ class TripsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_trip
-      @trip = Trip.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def trip_params
-      params.require(:trip).permit(:driver_id, :trip_id, :when, :destination, :source, :petrolcost, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_trip
+    @trip = Trip.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def trip_params
+    params.require(:trip).permit(:driver_id, :trip_id, :when, :destination, :source, :petrolcost, :description)
+  end
 end
