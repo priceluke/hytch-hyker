@@ -14,12 +14,8 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin
-    if current_user.nil?
-      redirect_to root_path
+    (current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.is_admin)
 
-    elsif !current_user.is_admin?
-      redirect_to home_myaccount_path
-    end
   end
 end
 # t.string "email", default: "", null: false

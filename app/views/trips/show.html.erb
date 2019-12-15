@@ -16,7 +16,7 @@
 <div class="card">
   <div class="card-body">
     <p class="card-text">
-    The more people that join, the cheaper the journey! As it stands, each person will have to pay £<%= @trip.petrolcost / (passengers.to_a.count + 1)  %> but this could fall to £<%= @trip.petrolcost / ( driver.vehicleCapacity ) %> if the car gets filled.
+    The more people that join, the cheaper the journey! As it stands, each person will have to pay £<%= @trip.petrolcost / (passengers.to_a.count + 1)  %> but this could fall to £<%= @trip.petrolcost / ( driver.vehicleCapacity + 1) %> if the car gets filled.
 </p>
   </div>
   <div class="card-footer">
