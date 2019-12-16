@@ -15,6 +15,13 @@ class TripsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
+  test "should get new" do
+    sign_in users(:one)
+
+    get new_trip_url
+    assert_response :success
+  end
+
   test "shouldnt create trip" do
     assert_no_difference('Trip.count') do
       post trips_url, params: { trip: { description: @trip.description, destination: @trip.destination, driver_id: @trip.driver_id, petrolcost: @trip.petrolcost, source: @trip.source, trip_id: @trip.trip_id, when: @trip.when } }
@@ -22,6 +29,17 @@ class TripsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
   end
+
+  test "should create trip" do
+    sign_in users(:one)
+
+    assert_no_difference('Trip.count') do
+      post trips_url, params: { trip: { description: @trip.description, destination: @trip.destination, driver_id: @trip.driver_id, petrolcost: @trip.petrolcost, source: @trip.source, trip_id: @trip.trip_id, when: @trip.when } }
+    end
+
+    assert_response :success
+  end
+
 
   test "shouldnt show trip" do
     get trip_url(@trip)
@@ -37,12 +55,12 @@ class TripsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit" do
+  test "shouldnt get edit" do
     get edit_trip_url(@trip)
     assert_response :redirect
   end
 
-  test "shouldnt get edit" do
+  test "should get edit" do
     sign_in users(:one)
 
     get edit_trip_url(@trip)
@@ -54,8 +72,17 @@ class TripsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  test "should destroy trip" do
+  test "shouldnt destroy trip" do
     assert_no_difference('Trip.count', -1) do
+      delete trip_url(@trip)
+    end
+
+    assert_response :redirect
+  end
+
+  test "should destroy trip" do
+    sign_in users(:one)
+    assert_difference('Trip.count', -1) do
       delete trip_url(@trip)
     end
 

@@ -17,3 +17,12 @@ two:
   source: Spain
   petrolcost: 100
   description: ByeWorld
+
+valid:
+  driver_id: elliot@allsafe.com
+  trip_id: 2
+  when: 2020-10-28 20:47:08
+  destination: France
+  source: Spain
+  petrolcost: 40
+  description: 123451234512345123451234512345

@@ -21,11 +21,14 @@ To see the site in action ensure the database environment is set to **developmen
 
 Make sure you check out **My Account** to get analytics!
 
+I generated the data randomly using generatedata.com which meant I could easily add relationships to my seeding file.
+
+Please feel free to run **rake db:seed" and reset the database.
 ## Where to find examples of...
 
 ###  Only those routes required exposed:
 You can see all routes if you are an administrator for data management purposes but standard users don't need to be able to see pivot table routes so these are blocked.
->localhost:888/trip_users/1
+>localhost:888/trip_users/
 ### JQuery
 I have included a dark mode to prevent strain on users eyes at night.
 ### Partials
@@ -33,6 +36,8 @@ Partials used throughout.
 ### Controllers: Testing
 The following command tests all aspects of the Rails app, including restricted routes that should only be accessible to an Admin.
 >rails test
+### Models: Testing
+Testing also includes model validation, via the same command. 
 ### Mailer
 Contact mailer works as per lab /w customisation.
 ### Models: Validation
@@ -76,3 +81,6 @@ UserTrip
 	PassengerID*
 	Message
 ```
+
+## What's missing?
+The validation on the Vehicle Capacity hasn't been finished yet.

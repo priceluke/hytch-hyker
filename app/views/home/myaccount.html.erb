@@ -5,22 +5,24 @@
   postedtrips = Trip.find_by_sql("SELECT * FROM trips INNER JOIN users ON trips.driver_id = users.email WHERE users.email='" + current_user.email + "'")
 %>
 <div class="card text-center">
-<div class="card-header"><%= t('myaccount.welcome') %>
-</div>
-<div class="card-body">
-  <h3 class="card-title"><%= current_user.name %></h3><br><h5><%= current_user.email %></h5>
+  <div class="card-header"><%= t('myaccount.welcome') %>
+  </div>
+  <div class="card-body">
+    <h3 class="card-title"><%= current_user.name %></h3><br><h5><%= current_user.email %></h5>
 
-  You've posted
-  <%=  postedtrips.to_a.count %> Journeys.<br>You've booked
-  <%=  mytrips.to_a.count %> Journeys.
-  <br>  <%= link_to "Change your password", edit_user_registration_path, :class => "btn btn-primary" %><br>
+    You've posted
+    <%= postedtrips.to_a.count %> Journeys.<br>You've booked
+    <%= mytrips.to_a.count %> Journeys.
+    <br>  <%= link_to "Change your password", edit_user_registration_path, :class => "btn btn-primary" %><br>
 
-</div>
-<div class="card-footer text-muted">
-  User Type:
-    <% if current_user.is_admin?%><% %>
-      Administrator<%else %>Standard User
-  <% end %></div>
+  </div>
+  <div class="card-footer text-muted">
+    User Type:
+    <% if current_user.is_admin? %>
+      <% %>
+      Administrator
+    <% else %>Standard User
+    <% end %></div>
 </div>
 
 <br>
@@ -31,26 +33,30 @@
 
 <div class="card-deck">
   <% mytrips.each do |trip_users| %>
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= trip_users.source %> to  <%= trip_users.destination %></h5>
-          <p class="card-text"> <%= trip_users.when %><br>The Trip currently has <%=    TripUser.find_by_sql("SELECT * FROM trip_users WHERE TripID=" + trip_users.trip_id.to_s).length %> passengers.</p>
-          <%= link_to 'Show', trip_path(trip_users.trip_id), class: "btn btn-primary" %>
-        </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= trip_users.source %> to  <%= trip_users.destination %></h5>
+        <p class="card-text"> <%= trip_users.when %><br>The Trip currently
+          has <%= TripUser.find_by_sql("SELECT * FROM trip_users WHERE TripID=" + trip_users.trip_id.to_s).length %>
+          passengers.</p>
+        <%= link_to 'Show', trip_path(trip_users.trip_id), class: "btn btn-primary" %>
       </div>
+    </div>
     <br>
-  <%end %>
+  <% end %>
   <% postedtrips.each do |trip| %>
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= trip.source %> to  <%= trip.destination %></h5>
-          <p class="card-text"><%= trip.when %><br>The Trip currently has <%=    TripUser.find_by_sql("SELECT * FROM trip_users WHERE TripID=" + trip.trip_id.to_s).length %> passengers.
-          </p>
-          <%= link_to 'Show', trip_path(trip.trip_id), class: "btn btn-primary" %>
-        </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= trip.source %> to  <%= trip.destination %></h5>
+        <p class="card-text"><%= trip.when %><br>The Trip currently
+          has <%= TripUser.find_by_sql("SELECT * FROM trip_users WHERE TripID=" + trip.trip_id.to_s).length %>
+          passengers.
+        </p>
+        <%= link_to 'Show', trip_path(trip.trip_id), class: "btn btn-primary" %>
       </div>
-     <br>
-  <%end %>
+    </div>
+    <br>
+  <% end %>
 
 </div>
 <br>
@@ -61,8 +67,8 @@
     User ID: <%= current_user.id %><br>
     Last Logged In: <%= current_user.updated_at %><br>
     Vehicle Capacity: <%= current_user.vehicleCapacity %><br>
-    Number Plate: <%= current_user.numberPlate%><br>
-    Postcode: <%= current_user.numberPlate%><br>
-    Phone Number: <%= current_user.contactNumber%><br>
+    Number Plate: <%= current_user.numberPlate %><br>
+    Postcode: <%= current_user.numberPlate %><br>
+    Phone Number: <%= current_user.contactNumber %><br>
   </div>
 </div>

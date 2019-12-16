@@ -1,8 +1,8 @@
 class TripUser < ApplicationRecord
 validate :is_user_real
 validate :is_trip_real
-#belongs_to :trip
-#has_one :user
+belongs_to :trip, optional: true
+has_one :user
 
 def is_trip_real
   if self.TripID.present? && !Trip.exists?(:trip_id => self.TripID)

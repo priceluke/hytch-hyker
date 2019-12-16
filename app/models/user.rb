@@ -3,10 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   # Driver Relationship, wont always be present so optional
-  #  has_many :trips, optional: true
+  has_many :trips
+
   #has_and_belongs_to_many :trips
   # Passenger Relationship, wont always be present so optional
-  #has_and_belongs_to_many :trip_users
+  belongs_to :trip_users, optional: true
   # has_many :trip_users, optional: true
 
   devise :database_authenticatable, :registerable,

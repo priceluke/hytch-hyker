@@ -4,19 +4,19 @@
       <h2><%= t('program.error') %>>:</h2>
 
       <ul>
-      <% trip_user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% trip_user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-<br>
+  <br>
   <div class="form-group">
     <%= form.text_area :message, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.submit "Submit", class: "btn btn-outline-primary"  %>
+    <%= form.submit "Submit", class: "btn btn-outline-primary" %>
   </div>
 <% end %>

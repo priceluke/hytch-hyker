@@ -1,69 +1,73 @@
 <p id="notice"><%= notice %></p>
 
-  <div class="row">
-    <div class="col-sm-3">
-      <select class="form-control" id="search_col" onchange="search()">
-        <option value="1">Destination</option>
-        <option value="2">Source</option>
-        <option value="0">Date</option>
-      </select>
-    </div>
-    <div class="col-sm-3">
+<div class="row">
+  <div class="col-sm-3">
+    <select class="form-control" id="search_col" onchange="search()">
+      <option value="1">Destination</option>
+      <option value="2">Source</option>
+      <option value="0">Date</option>
+    </select>
+  </div>
+  <div class="col-sm-3">
 
     <input type="text" id="searchParam" onkeyup="search()" class="form-control" placeholder="Search.." title="Search Box">
-    </div>
   </div>
-  <br />
+</div>
+<br/>
 <table class="table" id="trip_table">
   <thead>
-    <tr>
-      <th>When</th>
-      <th>Destination</th>
-      <th>Source</th>
-      <th>Petrol Cost</th>
-      <th>Description</th>
-      <th colspan="2"> </th>
-    </tr>
+  <tr>
+    <th>When</th>
+    <th>Destination</th>
+    <th>Source</th>
+    <th>Petrol Cost</th>
+    <th>Description</th>
+    <th colspan="2"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @trips.each do |trip| %>
-      <tr>
-        <td><%= trip.when %></td>
-        <td><%= trip.destination %></td>
-        <td><%= trip.source %></td>
-        <td><%= trip.petrolcost %></td>
-        <td><%= trip.description %></td>
-        <td></td>
-        <td>
+  <% @trips.each do |trip| %>
+    <tr>
+      <td><%= trip.when %></td>
+      <td><%= trip.destination %></td>
+      <td><%= trip.source %></td>
+      <td><%= trip.petrolcost %></td>
+      <td><%= trip.description %></td>
+      <td></td>
+      <td>
 
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle"
-                    type="button" id="dropdownMenu1" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-              Options
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <%= link_to 'Show', trip, class: "dropdown-item" %>
-              <%  if !current_user.nil? %>
-                <% if is_owner(trip, current_user) %><%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %><% end %>
-              <% if !is_owner(trip, current_user) && !is_passenger(trip, current_user) %><%= link_to "Join", trip_users_path(:PassengerID => current_user.email, :TripID => trip.trip_id, :message => "I'd love to join you on this trip!"), :method => :post, action: "create", class: "dropdown-item" %><%end %><% end %>
-            </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle"
+                  type="button" id="dropdownMenu1" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            Options
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <%= link_to 'Show', trip, class: "dropdown-item" %>
+            <% if !current_user.nil? %>
+              <% if is_owner(trip, current_user) %><%= link_to 'Destroy', trip, method: :delete, data: {confirm: 'Are you sure?'}, class: "dropdown-item" %>
+              <% end %>
+              <% if !is_owner(trip, current_user) && !is_passenger(trip, current_user) %><%= link_to "Join", trip_users_path(:PassengerID => current_user.email, :TripID => trip.trip_id, :message => "I'd love to join you on this trip!"), :method => :post, action: "create", class: "dropdown-item" %>
+              <% end %>
+            <% end %>
           </div>
+        </div>
 
 
-</td>
-      </tr>
-    <% end %>
+      </td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 <script>
 
-  function search() {
-      filterFunction(document.getElementById("search_col").value);
-  }
+    function search() {
+        filterFunction(document.getElementById("search_col").value);
+    }
+
     function filterFunction(column) {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("searchParam");

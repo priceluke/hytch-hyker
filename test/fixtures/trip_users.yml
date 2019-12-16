@@ -9,3 +9,8 @@ two:
   TripID: 2
   PassengerID: angela@allsafe.com
   message: hello world
+
+valid:
+  TripID: 1
+  PassengerID: angela@allsafe.com
+  message: hello world

@@ -35,10 +35,10 @@
     <orderEntry type="library" scope="PROVIDED" name="activejob (v5.2.3, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activemodel (v5.2.3, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activerecord (v5.2.3, rbenv: 2.5.7) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activerecord-reset-pk-sequence (v0.2.1, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activestorage (v5.2.3, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v5.2.3, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="addressable (v2.7.0, rbenv: 2.5.7) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="archive-zip (v0.12.0, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v9.0.0, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="autoprefixer-rails (v9.7.0, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.13, rbenv: 2.5.7) [gem]" level="application" />
@@ -50,7 +50,6 @@
     <orderEntry type="library" scope="PROVIDED" name="byebug (v11.0.1, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.29.0, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="childprocess (v3.0.0, rbenv: 2.5.7) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="chromedriver-helper (v2.1.1, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-rails (v4.2.2, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script (v2.4.1, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script-source (v1.12.2, rbenv: 2.5.7) [gem]" level="application" />
@@ -62,7 +61,6 @@
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.11.1, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.4.2, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.7.0, rbenv: 2.5.7) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="io-like (v0.3.0, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.9.1, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jquery-rails (v4.3.5, rbenv: 2.5.7) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="laydate-rails (v0.2.1, rbenv: 2.5.7) [gem]" level="application" />

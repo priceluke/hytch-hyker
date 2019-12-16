@@ -35,11 +35,11 @@ class TripUsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "shouldnt create trip_user" do
-    assert_no_difference('TripUser.count') do
+    assert_difference('TripUser.count') do
       post trip_users_url, params: { trip_user: { PassengerID:  @trip_user.PassengerID, TripID: 1, message: "hello world" } }
     end
 
-    assert_redirected_to root_url
+    assert_response :redirect
   end
 
   test "should create trip_user as admin" do
@@ -59,19 +59,19 @@ class TripUsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should get edit" do
     get edit_trip_user_url(@trip_user)
-    assert_response :redirect
+    assert_response :success
   end
 
   test "should update trip_user" do
     patch trip_user_url(@trip_user), params: { trip_user: { PassengerID: @trip_user.PassengerID, TripID: @trip_user.TripID, message: @trip_user.message } }
-    assert_redirected_to root_url
+    assert_response :redirect
   end
 
   test "should destroy trip_user" do
-    assert_no_difference('TripUser.count', -1) do
+    assert_difference('TripUser.count', -1) do
       delete trip_user_url(@trip_user)
     end
 
-    assert_redirected_to root_url
+    assert_response :redirect
   end
 end

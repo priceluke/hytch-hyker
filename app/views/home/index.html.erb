@@ -1,32 +1,32 @@
-    <h2><%= t('index.welcome') %></h2>
-    <h3><%= t('index.h3') %></h3>
-    <p><%= t('index.p1') %></p>
-    <p><%= t('index.p2') %>:</p>
-    <% flash.each do |key, value| %>
-    <%= content_tag :div, content_tag(:p, value), id: "#{key}" unless value.blank? %>
-    <% end %>
-    <table style="width:80%;" class="table">
-      <thead>
-      <tr>
-        <th>When</th>
-        <th>Destination</th>
-        <th>Source</th>
-        <th>Petrolcost</th>
-        <th>Description</th>
-        <th colspan="1"></th>
-      </tr>
-      </thead>
+<h2><%= t('index.welcome') %></h2>
+<h3><%= t('index.h3') %></h3>
+<p><%= t('index.p1') %></p>
+<p><%= t('index.p2') %>:</p>
+<% flash.each do |key, value| %>
+  <%= content_tag :div, content_tag(:p, value), id: "#{key}" unless value.blank? %>
+<% end %>
+<table style="width:80%;" class="table">
+  <thead>
+  <tr>
+    <th>When</th>
+    <th>Destination</th>
+    <th>Source</th>
+    <th>Petrolcost</th>
+    <th>Description</th>
+    <th colspan="1"></th>
+  </tr>
+  </thead>
 
-      <tbody>
-      <% @trips.each do |trip| %>
-        <tr>
-          <td><%= trip.when %></td>
-          <td><%= trip.destination %></td>
-          <td><%= trip.source %></td>
-          <td><%= trip.petrolcost %></td>
-          <td><%= trip.description %></td>
-          <td><%= link_to 'Show', trip, class: "btn btn-outline-primary" %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+  <tbody>
+  <% @trips.each do |trip| %>
+    <tr>
+      <td><%= trip.when %></td>
+      <td><%= trip.destination %></td>
+      <td><%= trip.source %></td>
+      <td><%= trip.petrolcost %></td>
+      <td><%= trip.description %></td>
+      <td><%= link_to 'Show', trip, class: "btn btn-outline-primary" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

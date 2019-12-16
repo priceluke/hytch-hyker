@@ -1,6 +1,6 @@
 require 'active_record/fixtures'
 User.destroy_all;
-
+User.reset_pk_sequence
 User.create!([{
                   id: 1,
                   email: "elliot@allsafe.com",
@@ -66,6 +66,7 @@ User.create!([{
              ]);
 
 Trip.destroy_all;
+Trip.reset_pk_sequence
 
 Trip.create!([{
                   driver_id: "elliot@allsafe.com",
@@ -75,7 +76,7 @@ Trip.create!([{
                   destination: "Spain",
                   source: "France",
                   petrolcost: 100,
-                  description: "123456789012345678901234567890"
+                  description: "Pharetra et ultrices neque ornare aenean."
               }, {
                   driver_id: "elliot@allsafe.com",
                   trip_id: 2,
@@ -84,7 +85,7 @@ Trip.create!([{
                   destination: "France",
                   source: "Spain",
                   petrolcost: 100,
-                  description: "123456789012345678901234567890"
+                  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
               },
               {
                   driver_id: "angela@allsafe.com",
@@ -188,6 +189,7 @@ Trip.create!([{
               }]);
 
 TripUser.destroy_all;
+TripUser.reset_pk_sequence
 
 TripUser.create!([
                      {

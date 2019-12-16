@@ -1,8 +1,12 @@
 <%# SETUP FOR /SHOW/:id        %>
-<%# IS USER THE OWNER OF TRIP? %>   <% owner = is_owner(@trip, current_user) %>
-<%# IS USER A PASSENGER?       %>   <% passenger = is_passenger(@trip, current_user) %>
-<%# WHO ARE THE PASSENGERS?    %>   <% passengers = TripUser.find_by_sql("SELECT * FROM trip_users INNER JOIN users ON trip_users.PassengerID = users.email WHERE trip_users.TripID = " + @trip.trip_id.to_s)%>
-<%# WHO IS THE DRIVER?         %>   <% driver = get_driver_details(@trip) %>
+<%# IS USER THE OWNER OF TRIP? %>
+<% owner = is_owner(@trip, current_user) %>
+<%# IS USER A PASSENGER?       %>
+<% passenger = is_passenger(@trip, current_user) %>
+<%# WHO ARE THE PASSENGERS?    %>
+<% passengers = TripUser.find_by_sql("SELECT * FROM trip_users INNER JOIN users ON trip_users.PassengerID = users.email WHERE trip_users.TripID = " + @trip.trip_id.to_s) %>
+<%# WHO IS THE DRIVER?         %>
+<% driver = get_driver_details(@trip) %>
 <div class="card">
   <div class="card-body">
     <h4 class="card-title"><%= @trip.source %> to <%= @trip.destination %></h4>
@@ -11,17 +15,22 @@
       Total petrol cost of £<%= @trip.petrolcost %>. Driver is   <%= driver.name %>.
     </p>
   </div>
-    <div class="card-footer"><%= @trip.description %></div></div>
+  <div class="card-footer"><%= @trip.description %></div>
+</div>
 <br>
 <div class="card">
   <div class="card-body">
     <p class="card-text">
-    The more people that join, the cheaper the journey! As it stands, each person will have to pay £<%= @trip.petrolcost / (passengers.to_a.count + 1)  %> but this could fall to £<%= @trip.petrolcost / ( driver.vehicleCapacity + 1) %> if the car gets filled.
-</p>
+      The more people that join, the cheaper the journey! As it stands, each person will have to pay
+      £<%= @trip.petrolcost / (passengers.to_a.count + 1) %> but this could fall to
+      £<%= @trip.petrolcost / (driver.vehicleCapacity + 1) %> if the car gets filled.
+    </p>
   </div>
   <div class="card-footer">
-There is currently
-<%=  passengers.to_a.count %> passengers. <%= driver.vehicleCapacity - passengers.to_a.count %> Seats Remain in <%= driver.name %>'s car.</div>
+    There is currently
+    <%= passengers.to_a.count %> passengers. <%= driver.vehicleCapacity - passengers.to_a.count %> Seats Remain
+    in <%= driver.name %>'s car.
+  </div>
 </div><br>
 
 <table class="table table-bordered">
@@ -34,43 +43,46 @@ There is currently
     <th>Manage</th>
   </tr>
   </thead>
-  <tbody>
+  <tbody> <%# Looping through the passengers and displaying the option to remove based on the current user %>
   <% passengers.each do |trip_users| %>
-    <%# GET TRIP_USER  OBJ%><% @trip_user_object =  TripUser.where(:PassengerID => trip_users.email, :TripID => @trip.trip_id).first  %>
+    <%# GET TRIP_USER  OBJ%>
+    <% @trip_user_object = TripUser.where(:PassengerID => trip_users.email, :TripID => @trip.trip_id).first %>
 
     <% @trip_user = trip_users %>
-  <tr>
-    <td><%= trip_users.name %>
-    </td>
-    <td><%= trip_users.contactNumber %></td>
-    <td><%= trip_users.email %></td>
-    <td><%= trip_users.message %></td>
-    <td> <% if owner %>
-        <%= link_to 'Kick', trip_user_path(@trip_user_object) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
+    <tr>
+      <td><%= trip_users.name %>
+      </td>
+      <td><%= trip_users.contactNumber %></td>
+      <td><%= trip_users.email %></td>
+      <td><%= trip_users.message %></td>
+      <td>
+        <% if owner %>
+          <%= link_to 'Kick', trip_user_path(@trip_user_object), data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-outline-primary" %>
 
-      <% end %>
-      <% if trip_users.PassengerID == current_user.email %>
-        <%= link_to 'Leave', trip_user_path(@trip_user_object) ,data: { confirm: 'Are you sure?' }, :method => :delete, class: "btn btn-outline-primary"  %>
+        <% end %>
+        <% if trip_users.PassengerID == current_user.email %>
+          <%= link_to 'Leave', trip_user_path(@trip_user_object), data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-outline-primary" %>
 
-      <% end %></td>
-  </tr>
+        <% end %></td>
+    </tr>
   <% end %>
   </tbody>
 </table>
 
 <br>
-    <div class="card">
-      <div class="card-body">
+<div class="card">
+  <div class="card-body">
 
-      <%  if owner %>
-        <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-outline-primary" %>
-        <%= link_to 'Remove', @trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-primary" %>
-      <%end %>  <% if !passenger && !owner %>
-          <%= link_to "Join", trip_users_path(:PassengerID => current_user.email, :TripID => @trip.trip_id, :message => "I'd love to join you on this trip!"), :method => :post, action: "create", class: "btn btn-outline-primary" %>
-        <%end %></td>
-      <%= link_to 'Back', trips_path, class: "btn btn-outline-primary" %>
-      </div>
-    </div>
+    <% if owner %>
+      <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-outline-primary" %>
+      <%= link_to 'Remove', @trip, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-outline-primary" %>
+    <% end %>
+    <% if !passenger && !owner %>
+      <%= link_to "Join", trip_users_path(:PassengerID => current_user.email, :TripID => @trip.trip_id, :message => "I'd love to join you on this trip!"), :method => :post, action: "create", class: "btn btn-outline-primary" %>
+    <% end %></td>
+    <%= link_to 'Back', trips_path, class: "btn btn-outline-primary" %>
+  </div>
+</div>
 
 
 

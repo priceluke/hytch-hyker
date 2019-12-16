@@ -1,12 +1,12 @@
 <%= form_with(model: trip, local: true) do |form| %>
   <% if trip.errors.any? %>
     <div class="alert alert-danger" role="alert">
-    <h2><%= t('trip.error') %>:</h2>
+      <h2><%= t('trip.error') %>:</h2>
 
       <ul>
-      <% trip.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% trip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -42,7 +42,7 @@
     <%= form.text_area :description, class: "form-control" %>
   </div>
 
-    <%= form.submit "Post", :class => "btn btn-outline-primary" %>
-  <%= link_to 'Back', trips_path,:class => "btn btn-outline-primary" %>
+  <%= form.submit "Post", :class => "btn btn-outline-primary" %>
+  <%= link_to 'Back', trips_path, :class => "btn btn-outline-primary" %>
 
 <% end %>

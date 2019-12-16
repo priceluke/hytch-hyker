@@ -45,6 +45,7 @@ en:
   tripuser:
     message: Add a Message
   trip:
+    title: Customise your Post
     error: Darn it! Trip couldnt be saved
     edit: Editing Trip
   contact:
@@ -65,3 +66,5 @@ en:
     request_contact:
       email_sent: Your email has been sent, we will get back to you shortly!
       no_email: You didn't provide an email Address!
+      no_phone: You didn't provide an valid Phone Number!
+      message_length: Please keep it short and sweet!
